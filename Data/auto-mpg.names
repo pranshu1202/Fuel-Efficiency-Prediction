@@ -27,7 +27,7 @@
 
 5. Number of Instances: 398
 
-6. Number of Attributes: 9 including the class attribute
+6. Number of Attributes: 8 including the class attribute
 
 7. Attribute Information:
 
@@ -38,8 +38,7 @@
     5. weight:        continuous
     6. acceleration:  continuous
     7. model year:    multi-valued discrete
-    8. origin:        multi-valued discrete
-    9. car name:      string (unique for each instance)
+    8. origin:        multi-valued discrete)
 
 8. Missing Attribute Values:  horsepower has 6 missing values
 
