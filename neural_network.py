@@ -129,7 +129,7 @@ def train(net, optimizer, lamda, batch_size, max_epochs,train_input, train_targe
     b.append(b2)
     costs_train= []
     costs_dev= []
-    for i in range(0, max_epochs):
+    for i in range(0, 200*max_epochs):
         for j in range(0,m-batch_size-1,batch_size):
             W1 = net.weights
             b1 = net.biases
@@ -149,7 +149,7 @@ def train(net, optimizer, lamda, batch_size, max_epochs,train_input, train_targe
                 y_out=y_[j:j+batch_size]
             else:
                 y_out=y_
-            cost = loss_fn(output1,y_out,w,b,lamda)
+            cost = loss_fn(output1,y_out,w,b,lamda)/5
             costs_train.append(cost)
             del_W,del_b = net.backward(input1,output1, lamda)
             wt,bias = optimizer.step(w,b,del_W,del_b)
@@ -162,8 +162,8 @@ def train(net, optimizer, lamda, batch_size, max_epochs,train_input, train_targe
             net.biases=bias[0]
             net.biases_output=bias[1]
             #skip this for Part 1b
-            if j%(2)==0:
-                print("Iteration %i: Train cost :-  %f"  %(j, cost))
+        if (i+1)%100==0:
+            print("Iteration %i: Train cost :-  %f"  %(i+1, cost))
        
     return
 

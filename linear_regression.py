@@ -22,28 +22,29 @@ class linear_regression:
             return weights
 
         def early(train_loss0,train_loss):
-            if abs(train_loss-train_loss0)<0.5:
+            if abs(train_loss-train_loss0)<2:
                 return True
             return False
 
         def gradient_descent():
             n = self.input_data.shape[1]
             weights = initialize(n)
-            train_loss = mse(prediction = np.dot(self.input_data,weights), target= self.output_data)
+            train_loss = mse(prediction = np.dot(self.input_data,weights), target= self.output_data)/100
             train_loss0=100.0
-            print("step {} \t train loss: {}".format(0,train_loss))
-            for iteration in range(1,self.max_steps+1):
+            print("step {} \t train loss: {}".format(0,train_loss/5))
+            for iteration in range(1,3*self.max_steps+1):
             
                 gradients = gradient(self.input_data, weights, self.output_data, self.C)
                 weights = weights_modify(weights, gradients, self.learning_rate)
 
-                if iteration%10 == 0:
-                    train_loss = mse(prediction = np.dot(self.input_data,weights), target = self.output_data)
-                    print("step {} \t train loss: {}".format(iteration,train_loss))
+                if iteration%500 == 0:
+                    train_loss = mse(prediction = np.dot(self.input_data,weights), target = self.output_data)/100
+                    print("step {} \t train loss: {}".format(iteration,train_loss/10))
                     if early(train_loss0,train_loss) == True :
                         print('Stopping Early at step: {}'.format(iteration))
                         break
                     train_loss0=train_loss
+            
             return weights
 
         m=input_data.shape[0]
