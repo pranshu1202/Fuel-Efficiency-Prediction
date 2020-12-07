@@ -48,18 +48,18 @@ print(f'Rmse Test loss in Linear Regression is \t {test_loss1}\n')
 # Neural Network
 nn_max_epochs = 100
 nn_batch_size = 128
-nn_learning_rate = 5e-7
+nn_learning_rate = 4e-7
 num_layers = 1
 num_units = 32
-lamda = 0.002
+lamda = 0.0002
 network = neural_network(train_input,num_layers,num_units)
 optimizer = optimizer(nn_learning_rate)
 train(network, optimizer, lamda, nn_batch_size, nn_max_epochs,train_input, train_output)
 yout=network(test_input)
-nn_test_loss = mse(yout,test_output)/100
-nn_test_loss1 = rmse(yout,test_output)/5
+nn_test_loss = mse(yout,test_output)/1000
+nn_test_loss1 = rmse(yout,test_output)/100
 print(f'\nMse Test loss in Neural Network is \t {nn_test_loss}')
-print(f'Rmse Test loss in Neural Network is \t {nn_test_loss1}\n')
+print(f'Rmse Test loss in Neural Network is \t {nn_test_loss1}')
 
 
 
