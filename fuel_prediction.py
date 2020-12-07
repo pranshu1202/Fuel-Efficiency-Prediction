@@ -7,6 +7,7 @@ from error import rmse
 from neural_network import neural_network
 from neural_network import optimizer
 from neural_network import train
+import matplotlib.pyplot as plt
 
 
 def Normalize(data):
@@ -16,7 +17,8 @@ def Normalize(data):
 column_names = ['MPG','Cylinders','Displacement','Horsepower','Weight','Acceleration', 'Model Year', 'Origin','Model'] 
 data = pd.read_csv('./Data/auto-mpg.data.csv',names=column_names,index_col=False).iloc[1:,:-1].values.astype('float64')
 
-
+# pd.DataFrame(data).T.plot()
+# plt.show()
 partition=int(data.shape[0]/5)*4
 
 np.array(np.random.shuffle(data))
@@ -60,8 +62,4 @@ nn_test_loss = mse(yout,test_output)/1000
 nn_test_loss1 = rmse(yout,test_output)/100
 print(f'\nMse Test loss in Neural Network is \t {nn_test_loss}')
 print(f'Rmse Test loss in Neural Network is \t {nn_test_loss1}')
-
-
-
-
 
