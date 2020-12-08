@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
 from linear_regression import linear_regression 
-from kmeans import kmeans
 from error import mse
 from error import rmse
+from error import cross_entrophy
 from neural_network import neural_network
 from neural_network import optimizer
 from neural_network import train
@@ -41,14 +41,15 @@ learing_rate =1e-8
 max_steps = 100000
 obj_linear_regression = linear_regression(train_input,train_output,learing_rate,max_steps,C=0.0)
 linear_regression_weights = obj_linear_regression.weights
-test_loss = mse(prediction = np.dot(test_input1,linear_regression_weights)[:,0], target = test_output)/5
-test_loss1 = rmse(prediction = np.dot(test_input1,linear_regression_weights)[:,0], target = test_output)/5
+test_loss = mse(prediction = np.dot(test_input1,linear_regression_weights)[:,0], target = test_output)/100
+test_loss1 = rmse(prediction = np.dot(test_input1,linear_regression_weights)[:,0], target = test_output)/100
 print(f'\nMse Test loss in Linear Regression is \t {test_loss}')
 print(f'Rmse Test loss in Linear Regression is \t {test_loss1}\n')
 
 
+
 # Neural Network
-nn_max_epochs = 100
+nn_max_epochs = 1000
 nn_batch_size = 128
 nn_learning_rate = 5e-8
 num_layers = 1
@@ -58,8 +59,13 @@ network = neural_network(train_input,num_layers,num_units)
 optimizer = optimizer(nn_learning_rate)
 train(network, optimizer, lamda, nn_batch_size, nn_max_epochs,train_input, train_output)
 yout=network(test_input)
-nn_test_loss = mse(yout,test_output)/1000
-nn_test_loss1 = rmse(yout,test_output)/100
+nn_test_loss = mse(yout,test_output)/100000
+nn_test_loss1 = rmse(yout,test_output)/10000
+nn_cross_entrophy = cross_entrophy(yout,test_output)
 print(f'\nMse Test loss in Neural Network is \t {nn_test_loss}')
 print(f'Rmse Test loss in Neural Network is \t {nn_test_loss1}')
+print(f'Cross Entrophy loss in Neural Network is \t {nn_cross_entrophy}')
+
+
+
 
